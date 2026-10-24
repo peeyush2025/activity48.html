@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Delivery tracker</title>
+    </head>
+    <style>
+        body {
+            background-color: aliceblue;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        div {
+            margin-top: 20px;
+            border: 1px solid #ff5a43;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        </style>
+    <body>
+        <h1>Delivery Tracker</h1>
+        <button onclick="saveorder()">Save Order</button>
+        <button onclick="startdelivery()">Start Delivery</button>
+
+        <div>JSON Text: <span id="jsonText"></span></div>
+        <div>loaded items: <span id="loadedItems"></span></div>
+        <div>loaded price: <span id="loadedPrice"></span></div>
+        <div>delivery status: <span id="deliveryStatus"></span></div>
+        <div>result: <span id="result"></span></div>
+
+    </body>
+    <script>
+        let order = {
+            items: [],
+            price: 0,
+            status: "not started",
+            shop: "Shop A"
+        };
+        function saveorder() {
+            let jsontext=JSON.stringify(order);
+            document.getElementById("jsonText").innerText = jsontext;
+        }
+        let loadedorder=JSON.parse(jsontext);
+        document.getElementById("loadedItems").innerText = loadedorder.items.length;
+        document.getElementById("loadedPrice").innerText = loadedorder.price;
+        document.getElementById("deliveryStatus").innerText = loadedorder.status;
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function startdelivery() {
+            document.getElementById("result").innerText = "";
+            document.getElementById("deliveryStatus").innerText = "order received";
+            await delay(2000);
+            document.getElementById("deliveryStatus").innerText = "order is being prepared";
+            await delay(2000);
+            document.getElementById("deliveryStatus").innerText = "order is out for delivery";
+            await delay(2000);
+            document.getElementById("deliveryStatus").innerText = "order delivered";
+            document.getElementById("result").innerText = "Delivery completed successfully!";}
+            
+    
+
+    </script>
+</html>
